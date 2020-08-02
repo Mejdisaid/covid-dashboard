@@ -67,6 +67,7 @@ const Departement  = ({ handleCountryChange , handleTypeChange}) =>   {
                 <option value="Italie"> Italie </option>
                 <option value="Pakistan"> Pakistan </option>
                 <option value="Tunisie"> Tunisie </option>
+                <option value="Brésil"> Brésil </option>
             </NativeSelect>
             Display mode
             <NativeSelect defaultValue="cumul" onChange={(e) => handleTypeChange(e.target.value)}>

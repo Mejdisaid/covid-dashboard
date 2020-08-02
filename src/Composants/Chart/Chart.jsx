@@ -3,30 +3,31 @@ import { Line } from 'react-chartjs-2' ;
 import styles from './Chart.module.css' ;
 //import * as zoom from 'chartjs-plugin-zoom' ; 
 
-const exemple = ( ) => {
-    console.log ( 'it works') ; 
-}
 
 
-const Chart  = ( {data:{GlobalData , PaysData} , country, diff }) =>   {
+
+const Chart  = ( {data:{GlobalData , PaysData} , country, diff}) =>   {
+    
     var text0 = 'total infected' ;
     var text1 = 'active cases'; 
     var text2 = 'recoveries' ; 
     var text3 = 'deaths' ;
+    
     var dateData  =[]  ;
     var totalinfectionData =[] ;
     var infectionData = [] ;  
     var recoveredData = [] ;
     var deathsData = [] ; 
+
+    var totalinfectionDataDiff =[] ;
     var infectionDataDiff = [] ; 
     var recoveredDataDiff = [] ; 
     var deathsDataDiff = [] ; 
-    exemple() ;
+    
     if (!GlobalData)
         return 'Loading ...';
-    //console.log(  GlobalData );
-    //console.log(country) ;
-    //console.log(diff) ;
+
+
 
     if (( country === '' ) || (country === 'global') ) {
         for ( let i = GlobalData.length-1 ; i > 0 ; i-- ){
@@ -45,7 +46,7 @@ const Chart  = ( {data:{GlobalData , PaysData} , country, diff }) =>   {
             if (PaysData[i].Pays === country){
                 infectionData[j] = PaysData[i].Infection * PaysData[i].TauxInfection *0.01 ; 
                 totalinfectionData[j] = PaysData[i].Infection ;
-                console.log(PaysData[i].TauxInfection);
+                //console.log(PaysData[i].TauxInfection);
                 j = j+1 ; 
             }      
         }
@@ -76,6 +77,7 @@ const Chart  = ( {data:{GlobalData , PaysData} , country, diff }) =>   {
         text1 = 'new active cases' ; 
         text2 = 'new recoveries' ; 
         text3 = 'new deaths' ;
+        totalinfectionDataDiff[0] = totalinfectionData[0] ;
         infectionDataDiff[0] = infectionData[0] ; 
         recoveredDataDiff[0] = recoveredData[0] ; 
         deathsDataDiff[0]    = deathsData[0] ; 
@@ -88,15 +90,18 @@ const Chart  = ( {data:{GlobalData , PaysData} , country, diff }) =>   {
         for ( let i =1  ; i< deathsData.length ; i++ ){
             deathsDataDiff[i] = deathsData[i] - deathsData[i-1] ; 
         }
-        
+        for ( let i =1  ; i< totalinfectionData.length ; i++ ){
+            totalinfectionDataDiff[i] = totalinfectionData[i] - totalinfectionData[i-1] ; 
+        }
+        totalinfectionData = totalinfectionDataDiff ;
         infectionData = infectionDataDiff ; 
         recoveredData = recoveredDataDiff ; 
         deathsData    = deathsDataDiff    ;
     }
     
-     console.log(infectionData);
-     console.log(recoveredData);
-     console.log(dateData);
+     //console.log(infectionData);
+     //console.log(recoveredData);
+     //console.log(dateData);
 
 
      // FORMAT THE DATE FOR THE CHART 

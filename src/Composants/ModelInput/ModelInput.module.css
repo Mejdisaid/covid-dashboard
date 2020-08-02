@@ -1,0 +1,8 @@
+.container {
+    width: 100% !important;
+    justify-content: center  !important ;
+    margin : 10% 0% 0% 0% !important ;
+}
+button{
+    justify-content: center !important ; 
+}

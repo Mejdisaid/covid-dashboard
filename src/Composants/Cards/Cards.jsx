@@ -12,6 +12,7 @@ const Cards  = ( {data:{GlobalData , PaysData} , country} ) =>   {
      
     if (!GlobalData)
         return 'Loading ...';
+        
     console.log(country) ;
 
     var infection  = GlobalData[0].Infection ; 

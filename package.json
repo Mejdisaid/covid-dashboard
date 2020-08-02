@@ -6,7 +6,7 @@
     "node": "12.18.1",
     "npm": "6.14.5"
   },
-  "proxy": "https://www.data.gouv.fr",
+  "proxy": "https://cors-anywhere.herokuapp.com/",
   "dependencies": {
     "@material-ui/core": "^4.10.2",
     "@testing-library/jest-dom": "^4.2.4",
@@ -24,7 +24,7 @@
     "react-scripts": "3.4.1"
   },
   "scripts": {
-    "start": "./src/index.js",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -43,5 +43,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "gh-pages": "^3.1.0"
   }
 }
