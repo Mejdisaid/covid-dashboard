@@ -64,27 +64,28 @@ const ModelChart  = ( { data:{GlobalData , PaysData} ,country, N,s0,e0,i0,r0,a,b
         const da = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(d)
         dateData[i] = `${da}-${mo}-${ye}` ;
     }
-   // console.log ( "apres remplissage " + recovered) ; 
+    console.log ( "choice" + choice) ; 
     //console.log("parametres" + parameters + "N : "+ N) ; 
-    if (Choice === "opt"){
-        solution(GlobalData,realRecoveries , susceptibles ,exposed, infected , recovered, parameters,N) ; 
-        text1 =parameters[0] ; 
-        text2 =parameters[1] ; 
-        text3 =parameters[2] ;
-        text4 =parameters[3] ;
-    }
-    else
+    if (Choice === "def")
         {
             text1="" ;
             text2="";
             text3="";
             text4="";
         }
+    else {
+        solution(GlobalData,realRecoveries , susceptibles ,exposed, infected , recovered, parameters,N) ; 
+        text1 =parameters[0] ; 
+        text2 =parameters[1] ; 
+        text3 =parameters[2] ;
+        text4 =parameters[3] ;
+    }
+     
 
-    console.log("apres solution param " + parameters)  ;
-    console.log("apres solution dir" + direction(GlobalData,realRecoveries , susceptibles ,exposed, infected , recovered, parameters,N))  ;
-    console.log("apres solution param " + parameters)  ;
-    console.log ( "apres solution eqm" +  EQM(realRecoveries, recovered)) ; 
+    //console.log("apres solution param " + parameters)  ;
+    //console.log("apres solution dir" + direction(GlobalData,realRecoveries , susceptibles ,exposed, infected , recovered, parameters,N))  ;
+   // console.log("apres solution param " + parameters)  ;
+    //console.log ( "apres solution eqm" +  EQM(realRecoveries, recovered)) ; 
     return( 
         <div className={styles.container}>
             <Line
@@ -152,36 +153,36 @@ const EQM = (array1 , array2 ) =>{
 const direction= (GlobalData,realRecoveries , susceptibles ,exposed, infected , recovered, parameters,N)=>{
     var e1,e2,e3,e4,e5,e6,e7,e8  ; 
     let pas = 0.001 ; 
-    console.log("param " + parameters[0])  ;
+    //console.log("param " + parameters[0])  ;
     parameters[0]= parameters[0] + pas ; 
     remplissage(GlobalData, susceptibles ,exposed, infected , recovered,parameters,N);
     e1 = EQM(realRecoveries, recovered) ;
-    console.log("param " + parameters[0])  ;
+    //console.log("param " + parameters[0])  ;
     parameters[0]= parameters[0]-pas ; 
     parameters[1]= parameters[1]+pas ; 
     remplissage(GlobalData, susceptibles ,exposed, infected , recovered, parameters,N);
     e2 = EQM(realRecoveries, recovered) ;
-    console.log("param " + EQM(realRecoveries, recovered))  ;
+    //console.log("param " + EQM(realRecoveries, recovered))  ;
     parameters[1]= parameters[1]-pas ; 
     parameters[2]= parameters[2]+pas ; 
     remplissage(GlobalData, susceptibles ,exposed, infected , recovered, parameters,N);
     e3 = EQM(realRecoveries, recovered) ;
-    console.log("param " + parameters[0])  ;
+    //console.log("param " + parameters[0])  ;
     parameters[2]= parameters[2]-pas ; 
     parameters[3]= parameters[3]+pas ; 
     remplissage(GlobalData, susceptibles ,exposed, infected , recovered, parameters,N);
     e4 = EQM(realRecoveries, recovered) ;
-    console.log("param " + parameters[0])  ;
+    //console.log("param " + parameters[0])  ;
     parameters[3]= parameters[3]-pas ; 
     parameters[0]= parameters[0]-pas ; 
     remplissage(GlobalData, susceptibles ,exposed, infected , recovered, parameters,N);
     e5 = EQM(realRecoveries, recovered) ;
-    console.log("param " + parameters[0])  ;
+    //console.log("param " + parameters[0])  ;
     parameters[0]= parameters[0]+pas ; 
     parameters[1]= parameters[1]-pas ;  
     remplissage(GlobalData, susceptibles ,exposed, infected , recovered,parameters,N);
     e6 = EQM(realRecoveries, recovered) ;
-    console.log("param " + parameters[0])  ;
+    //console.log("param " + parameters[0])  ;
     parameters[1]= parameters[1]+pas ; 
     parameters[2]= parameters[2]-pas ; 
     remplissage(GlobalData, susceptibles ,exposed, infected , recovered, parameters,N);
@@ -190,8 +191,7 @@ const direction= (GlobalData,realRecoveries , susceptibles ,exposed, infected , 
     parameters[3]= parameters[3]-pas ; 
     remplissage(GlobalData, susceptibles ,exposed, infected , recovered, parameters,N);
     e8 = EQM(realRecoveries, recovered) ;
-    parameters[0]= parameters[0]-pas ; 
-    parameters[1]= parameters[1]+pas ; 
+    parameters[3]= parameters[3]+pas ; 
     if ((e1 <e2 )&&(e1<e3)&&(e1<e4)&&(e1<e5)&&(e1<e6)&&(e1<e7)&&(e1<e8)){
         parameters[0]=parameters[0] + pas ; 
         return e1  ; 
@@ -233,7 +233,7 @@ const solution = (GlobalData,realRecoveries , susceptibles ,exposed, infected , 
     var i = 0 ; 
     var minimum = EQM(realRecoveries , recovered) ; 
     //console.log("realrec" + realRecoveries) ; 
-    //console.log("recovered" + recovered) ; 
+    console.log("min" + minimum) ; 
     var aux = minimum ; 
     //console.log("minimum" + minimum); 
     while ( i< j){
